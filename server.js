@@ -13,7 +13,7 @@ const inquirer = require("inquirer");
   
   //connection.connect(err => {
     //if (err) throw err;
-    //console.log("WELCOME TO NEW BRITAIN EMPLOYEE TRACKER");
+    //console.log("WELCOME TO NEW BRITAIN Engeneer EMPLOYEE TRACKER");
     //startMenu();
   //});
 

@@ -22,12 +22,12 @@ const connection = mysql.createConnection({
           message: "What will you like to do?",
           choices: [
             'View all departments',
-            'View all jobs',
+            'View all roles',
             'View all employees',
             'Add a department',
-            'Add a job',
+            'Add a roles',
             'Add an employee',
-            'Update employee job',
+            'Update employee roles',
             'Exit',
           ],
         })
@@ -37,22 +37,22 @@ const connection = mysql.createConnection({
           case 'View all departments':
             viewDepartment();
             break;
-            case 'view all jobs':
-              viewJobs();
+            case 'View all roles':
+              viewroles();
               break;
-          case 'View all employees ':
+          case 'View all employees':
               viewEmployees();
             break;
           case 'Add a department':
             addDepartment();
             break;
-            case "Add a job":
-            addJob();
+            case "Add a roles":
+            addRoles();
             break;
             case "Add an employee":
               addEmployee();
               break;
-            case "Update employee job":
+            case "Update employee roles":
               updateEmployee();
             break;
           case "Exit":
@@ -71,8 +71,8 @@ const connection = mysql.createConnection({
         });
       };
       
-      const viewJobs = () => {
-        connection.query('SELECT * FROM job', function (err, res) {
+      const viewroles = () => {
+        connection.query('SELECT * FROM roles', function (err, res) {
           
          if (err) throw err;
           console.table(res);
@@ -82,7 +82,7 @@ const connection = mysql.createConnection({
       
       const viewEmployees = () => {
         connection.query(
-          'SELECT employee.id, first_name, last_name, title, salary, dept_name, manager_id FROM ((department JOIN job ON department.id = job.department_id) JOIN employee ON job.id = employee.job_id);',
+          'SELECT employee.id, first_name, last_name, title, salary, dept_name, manager_id FROM ((department JOIN roles ON department.id = roles.department_id) JOIN employee ON roles.id = employee.roles_id);',
           function (err, res) {
            // if (err) throw err;
             console.table(res);
@@ -112,17 +112,17 @@ const connection = mysql.createConnection({
           });
       };
       
-      const addJob = () => {
+      const addroles = () => {
         inquirer.prompt([
             {
-              name: 'jobTitle',
+              name: 'rolesTitle',
               type: 'input',
-              message: 'What is the job title?',
+              message: 'What is the roles title?',
             },
             {
               name: 'salary',
               type: 'input',
-              message: 'What is the salary for this job?',
+              message: 'What is the salary for this roles?',
             },
             {
               name: 'deptId',
@@ -132,11 +132,11 @@ const connection = mysql.createConnection({
           ])
           .then(answer => {
             connection.query(
-              'INSERT INTO job (title, salary, department_id) VALUES (?, ?, ?)',
-              [answer.jobTitle, answer.salary, answer.deptId],
+              'INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)',
+              [answer.rolesTitle, answer.salary, answer.deptId],
               function (err, res) {
                 if (err) throw err;
-                console.log('Job added!');
+                console.log('roles added!');
                 firstPrompt();
               }
             );
@@ -156,9 +156,9 @@ const connection = mysql.createConnection({
               message: "What is the employee's last name?",
             },
             {
-              name: 'jobId',
+              name: 'rolesId',
               type: 'input',
-              message: "What is the employee's job id?",
+              message: "What is the employee's roles id?",
             },
             {
               name: 'managerId',
@@ -168,8 +168,8 @@ const connection = mysql.createConnection({
           ])
           .then(answer => {
             connection.query(
-              'INSERT INTO employee (first_name, last_name, job_id, manager_id) VALUES (?, ?, ?, ?)',
-              [answer.nameFirst, answer.nameLast, answer.jobId, answer.managerId],
+              'INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES (?, ?, ?, ?)',
+              [answer.nameFirst, answer.nameLast, answer.rolesId, answer.managerId],
               function (err, res) {
                 if (err) throw err;
                 console.log('Employee added!');
@@ -188,15 +188,15 @@ const connection = mysql.createConnection({
               message: 'Enter employee id',
             },
             {
-              name: 'jobId',
+              name: 'rolesId',
               type: 'input',
-              message: 'Enter new job id',
+              message: 'Enter new roles id',
             },
           ])
           .then(answer => {
             connection.query(
-              'UPDATE employee SET job_id=? WHERE id=?',
-              [answer.jobId, answer.id],
+              'UPDATE employee SET roles_id=? WHERE id=?',
+              [answer.rolesId, answer.id],
               function (err, res) {
                 if (err) throw err;
                 console.log('Employee updated!');

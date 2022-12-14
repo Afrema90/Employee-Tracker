@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-require("console.table");
+const cTable = require("console.table");
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -12,73 +12,77 @@ const connection = mysql.createConnection({
   
  //mysql server & database
   connection.connect( (err) =>{
-    if (err) throw err;
+   if (err) throw err;
   });
 
-//Prompts the user
-function firstPrompt() {
+  connection.connect(err => {
+    if (err) throw err;
+    console.log("WELCOME ");
+    firstPrompt();
+  });
 
-  inquirer
-    .prompt({
-        type: "list",
-        name: "task",
-        message: "What will you like to do?",
-        choices: [
-             "View Employees",
-             "View Employees by Department",
-             "View Employees by Manager",
-             "Add Employee",
-          "Remove Employees",
-          "Update Employee Role",
-          "Add Role","View Roles",
-          "Add Department",
-          "View all Departments",
-          "End"]
-      })
-
-    .then(response => {
-        switch (response.menu) {
-        case 'View all departments':
-          viewDepartment();
-          break;
-          case 'view all jobs':
-            viewJobs();
+  const firstPrompt = () =>{
+    inquirer.prompt({
+          type: "list",
+          name: "task",
+          message: "What will you like to do?",
+          choices: [
+            'View all departments',
+            'View all jobs',
+            'View all employees',
+            'Add a department',
+            'Add a job',
+            'Add an employee',
+            'Update employee job',
+            'Exit',
+          ],
+        })
+  
+      .then(response => {
+          switch (response.task) {
+          case 'View all departments':
+            viewDepartment();
             break;
-        case 'View employees ':
-            viewEmployees();
-          break;
-        case 'Add a department':
-          addDepartment();
-          break;
-          case "Add a job":
-          addJob();
-          break;
-          case "Add an Employee":
-            addEmployee();
+            case 'view all jobs':
+              viewJobs();
+              break;
+          case 'View all employees ':
+              viewEmployees();
             break;
-          case "Update employee job":
-            updateEmployee();
-          break;
-        case "Exit":
-          connection.end();
-          
-        }
-    });
-};
+          case 'Add a department':
+            addDepartment();
+            break;
+            case "Add a job":
+            addJob();
+            break;
+            case "Add an employee":
+              addEmployee();
+              break;
+            case "Update employee job":
+              updateEmployee();
+            break;
+          case "Exit":
+            connection.end();
+            
+          }
+      });
+  };
 
     const viewDepartment = () => {
+      console.log("hello")
         connection.query('SELECT * FROM department', function (err, res) {
-          if (err) throw err;
+         if (err) throw err;
           console.table(res);
-          startMenu();
+          firstPrompt();
         });
       };
       
       const viewJobs = () => {
         connection.query('SELECT * FROM job', function (err, res) {
-          if (err) throw err;
+          
+         if (err) throw err;
           console.table(res);
-          startMenu();
+          firstPrompt();
         });
       };
       
@@ -86,9 +90,9 @@ function firstPrompt() {
         connection.query(
           'SELECT employee.id, first_name, last_name, title, salary, dept_name, manager_id FROM ((department JOIN job ON department.id = job.department_id) JOIN employee ON job.id = employee.job_id);',
           function (err, res) {
-            if (err) throw err;
+           // if (err) throw err;
             console.table(res);
-            startMenu();
+            firstPrompt();
           }
         );
       };
@@ -108,7 +112,7 @@ function firstPrompt() {
               function (err, res) {
                 if (err) throw err;
                 console.log('Department added!');
-                startMenu();
+                firstPrompt();
               }
             );
           });
@@ -139,7 +143,7 @@ function firstPrompt() {
               function (err, res) {
                 if (err) throw err;
                 console.log('Job added!');
-                startMenu();
+                firstPrompt();
               }
             );
           });
@@ -175,7 +179,7 @@ function firstPrompt() {
               function (err, res) {
                 if (err) throw err;
                 console.log('Employee added!');
-                startMenu();
+                firstPrompt();
               }
             );
           });
@@ -202,44 +206,10 @@ function firstPrompt() {
               function (err, res) {
                 if (err) throw err;
                 console.log('Employee updated!');
-                startMenu();
+                firstPrompt();
               }
             );
           });
       };
        firstPrompt();
-    // create an if statement
-    //.then((output) => {
-    //  console.log(output);
-     // if (output.action === "view all employees"){
-        
-    //  }else if(output.action === "add employee"){
-
-    //  }
-   // });
-//}; const inquirer = require("inquirer");
-
-
-
-
-//const menu = () => {
- // return inquirer
- //   .prompt([
-     // {
-      //  type: "list",
-     //   name: "action",
-    //    message: "what would you like to do",
-      //  choices: ["view all employees","add employee","update employee","view all roles", "add role", "view all departments", "add department"]
-     // },
-    //])
-
-    //// create an if statement
-    //.then((output) => {
-   //   console.log(output);
-    //  if (output.action === "view all employees"){
-        
-    //  }else if(output.action === "add employee"){
-
-   //   }
-   // });
-//};
+   

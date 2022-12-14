@@ -1,64 +1,74 @@
 const inquirer = require("inquirer");
+const mysql = require("mysql2");
+require("console.table");
 
-
-
-
-//const connection = mysql.createConnection({
-  //  host: 'localhost',
-   // port: 3306,
-    //user: 'root',
-   // password: 'Monamij1000',
-   // database: 'company_db',
- // });
+const connection = mysql.createConnection({
+    ost: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'Monamij1000',
+    database: 'company_db',
+ });
   
-  //connection.connect(err => {
-    //if (err) throw err;
-    //console.log("WELCOME TO NEW BRITAIN Engeneer EMPLOYEE TRACKER");
-    //startMenu();
-  //});
+ //mysql server & database
+  connection.connect( (err) =>{
+    if (err) throw err,
+    //run the start funtion
+    firstPrompt();
+  });
 
+//Prompts the user
+function firstPrompt() {
 
-const startmenu = () => {
-  return inquirer
-    .prompt([
-      {
+  inquirer
+    .prompt({
         type: "list",
-        name: "action",
-        message: "what would you like to do",
-        choices: ["view all employees","add employee","update employee","view all roles", "add role", "view all departments", "add department",'Exit,']
-      },
-    ])
+        name: "task",
+        message: "What will you like to do?",
+        choices: [
+             "View Employees",
+             "View Employees by Department",
+             "View Employees by Manager",
+             "Add Employee",
+          "Remove Employees",
+          "Update Employee Role",
+          "Add Role","View Roles",
+          "Add Department",
+          "View Departments",
+          // "Remove Role",
+          // "Update Employee Manager",
+          "End"]
+      })
 
     .then(response => {
         switch (response.menu) {
         case 'View all departments':
           viewDepartment();
           break;
-        case 'View all jobs':
-          viewJobs();
-          break;
-        case 'View all employees':
-          viewEmployees();
+          case 'view all jobs':
+            viewJobs();
+            break;
+        case 'View employees ':
+            viewEmployees();
           break;
         case 'Add a department':
           addDepartment();
           break;
-        case 'Add a job':
+          case "Add a job":
           addJob();
           break;
-        case 'Add an employee':
-          addEmployee();
-          break;
-        case 'Update employee job':
-          updateEmployee();
+          case "Add an Employee":
+            addEmployee();
+            break;
+          case "Update employee job":
+            updateEmployee();
           break;
         case "Exit":
           connection.end();
-          break;
-        default:
-          connection.end();
-      }
+          
+        }
     });
+};
 
     const viewDepartment = () => {
         connection.query('SELECT * FROM department', function (err, res) {
@@ -201,7 +211,7 @@ const startmenu = () => {
             );
           });
       };
-};
+
     // create an if statement
     //.then((output) => {
     //  console.log(output);

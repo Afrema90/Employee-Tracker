@@ -46,13 +46,13 @@ const connection = mysql.createConnection({
           case 'Add a department':
             addDepartment();
             break;
-            case "Add a roles":
+            case 'Add a roles':
             addRoles();
             break;
-            case "Add an employee":
+            case 'Add an employee':
               addEmployee();
               break;
-            case "Update employee roles":
+            case 'Update employee roles':
               updateEmployee();
             break;
           case "Exit":
@@ -82,11 +82,12 @@ const connection = mysql.createConnection({
       
       const viewEmployees = () => {
         connection.query(
-          'SELECT employee.id, first_name, last_name, title, salary, dept_name, manager_id FROM ((department JOIN roles ON department.id = roles.department_id) JOIN employee ON roles.id = employee.roles_id);',
+          'SELECT employee.id, first_name, last_name, title, salary, department_id, manager_id FROM ((department JOIN roles ON department.id = roles.department_id) JOIN employee ON roles.id = employee.role_id);',
           function (err, res) {
-           // if (err) throw err;
-            console.table(res);
-            firstPrompt();
+        
+           if (err) throw err;
+           console.table(res);
+           firstPrompt();
           }
         );
       };

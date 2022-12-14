@@ -15,12 +15,6 @@ const connection = mysql.createConnection({
    if (err) throw err;
   });
 
-  connection.connect(err => {
-    if (err) throw err;
-    console.log("WELCOME ");
-    firstPrompt();
-  });
-
   const firstPrompt = () =>{
     inquirer.prompt({
           type: "list",

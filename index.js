@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 require("console.table");
 
 const connection = mysql.createConnection({
-    ost: 'localhost',
+    host: 'localhost',
     port: 3306,
     user: 'root',
     password: 'Monamij1000',
@@ -35,8 +35,6 @@ function firstPrompt() {
           "Add Role","View Roles",
           "Add Department",
           "View Departments",
-          // "Remove Role",
-          // "Update Employee Manager",
           "End"]
       })
 

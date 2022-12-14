@@ -7,14 +7,12 @@ const connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'Monamij1000',
-    database: 'company_db',
+    database: 'employeetracker_db',
  });
   
  //mysql server & database
   connection.connect( (err) =>{
-    if (err) throw err,
-    //run the start funtion
-    firstPrompt();
+    if (err) throw err;
   });
 
 //Prompts the user
@@ -34,7 +32,7 @@ function firstPrompt() {
           "Update Employee Role",
           "Add Role","View Roles",
           "Add Department",
-          "View Departments",
+          "View all Departments",
           "End"]
       })
 
@@ -209,7 +207,7 @@ function firstPrompt() {
             );
           });
       };
-
+       firstPrompt();
     // create an if statement
     //.then((output) => {
     //  console.log(output);

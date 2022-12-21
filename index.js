@@ -47,7 +47,7 @@ const connection = mysql.createConnection({
             addDepartment();
             break;
             case 'Add a roles':
-            addRoles();
+            addroles();
             break;
             case 'Add an employee':
               addEmployee();
@@ -102,7 +102,7 @@ const connection = mysql.createConnection({
           ])
           .then(answer => {
             connection.query(
-              'INSERT INTO department (dept_name) VALUES (?)',
+              'INSERT INTO department (name) VALUES (?)',
               [answer.department],
               function (err, res) {
                 if (err) throw err;
@@ -169,7 +169,7 @@ const connection = mysql.createConnection({
           ])
           .then(answer => {
             connection.query(
-              'INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES (?, ?, ?, ?)',
+              'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)',
               [answer.nameFirst, answer.nameLast, answer.rolesId, answer.managerId],
               function (err, res) {
                 if (err) throw err;
@@ -196,7 +196,7 @@ const connection = mysql.createConnection({
           ])
           .then(answer => {
             connection.query(
-              'UPDATE employee SET roles_id=? WHERE id=?',
+              'UPDATE employee SET role_id=? WHERE id=?',
               [answer.rolesId, answer.id],
               function (err, res) {
                 if (err) throw err;

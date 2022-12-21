@@ -1,3 +1,4 @@
+<img width="1470" alt="Screenshot 2022-12-21 at 12 06 36 PM" src="https://user-images.githubusercontent.com/112598840/208968776-1d47c34d-48a7-421b-beb9-0c96c994d744.png">
 SQL Challenge: Employee Tracker
 Description
 My challenge this week was to build a command-line application to manage a company's employee database, using Node.js, Inquirer, and MySQL.

@@ -190,7 +190,16 @@ const connection = mysql.createConnection({
             },
             {
               name: 'rolesId',
-              type: 'input',
+              type: 'list',
+              choices: [
+                {value:1,name:"sales lead"}, 
+                {value:2,name:"sales person"}, 
+              {value:3,name:"lead engineer"}, 
+              {value:4,name:"software engineer"}, 
+              {value:5,name:"Accountant"}, 
+              {value:6,name:"Legal team Lead"}, 
+              {value:7,name:"lawyer"}, 
+              ],
               message: 'Enter new roles id',
             },
           ])

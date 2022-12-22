@@ -1,4 +1,5 @@
 SQL Challenge: Employee Tracker
+
 Description
 The challenge for this week was to build a command-line application that manage a company's employee database, using Node.js, Inquirer, and MySQL.
 Because this application won’t be deployed, I've created a walkthrough video that demonstrates its functionality and all acceptance criteria being met.
@@ -29,6 +30,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 Demonstration
 https://drive.google.com/file/d/194334tRJeD4YOBD66rNs4ColATUq1zXz/view
+
 Screenshots
 <img width="1100" alt="Screenshot 2022-12-21 at 8 45 43 PM" src="https://user-images.githubusercontent.com/112598840/209037280-83a0970c-4dea-4cab-b70b-3908482349d4.png">
 <img width="1470" alt="Screenshot 2022-12-21 at 8 45 31 PM" src="https://user-images.githubusercontent.com/112598840/209037290-a8cb4c13-7c57-402a-bf88-f7aedec2f796.png">

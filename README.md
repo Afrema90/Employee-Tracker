@@ -1,6 +1,6 @@
 SQL Challenge: Employee Tracker
 Description
-My challenge this week was to build a command-line application to manage a company's employee database, using Node.js, Inquirer, and MySQL.
+The challenge for this week was to build a command-line application that manage a company's employee database, using Node.js, Inquirer, and MySQL.
 Because this application won’t be deployed, I've created a walkthrough video that demonstrates its functionality and all acceptance criteria being met.
 
 User Story
@@ -28,6 +28,5 @@ WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 Demonstration
-gg
-
+https://drive.google.com/file/d/194334tRJeD4YOBD66rNs4ColATUq1zXz/view
 Screenshots
